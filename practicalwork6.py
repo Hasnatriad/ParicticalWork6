@@ -120,10 +120,10 @@ avg = avdeg(deg)
 print("Average Degree ", avg)
 
 tr = tri(G, n, deg)
-print("No. of Triangles ", tr)
+#print("No. of Triangles ", tr)
 
 trip = triplet(G, n)
-print("No. of Triplets ", trip)
+#print("No. of Triplets ", trip)
 
 cc = ccoef(tr, trip,  n)
 print("Clustering Coefficient ", cc)
@@ -373,9 +373,7 @@ def comp(G, sample, nodes, n, m, no_tests, no_links_discovered, no_links_discove
 sample_comp, no_tests_comp, no_links_discovered_comp, no_links_discovered_before_comp, abeff_comp, normeff_comp, releff_comp, evolution_comp = comp(G, sample, nodes, n, m, no_tests_ran, no_links_discovered_ran, no_links_discovered_before_ran, fileres_ran, islink, pairstested_ran, effbest_ran, effworst_ran, raneff_ran, abeff_ran, normeff_ran, releff_ran, evolution_ran)
 
 print('No. of tests in Complete Strategy ', no_tests_comp)
-print('No. of links detected in Complete Strategy ', no_links_discovered_comp)
-#print('Test No. for each edge found: ', fileres)
-   
+print('No. of links detected in Complete Strategy ', no_links_discovered_comp)  
 print("Absolute Efficiency for Complete Strategy ", abeff_comp)
 print("Normalised Efficiency for Complete Strategy ", normeff_comp)
 print("Relative Efficiency for Complete Strategy ", releff_comp)
@@ -526,8 +524,6 @@ sample_mix, no_tests_mix, no_links_discovered_mix, no_links_discovered_before_mi
 
 print('No. of tests in Mix Strategy ', no_tests_mix)
 print('No. of links detected in Mix Strategy ', no_links_discovered_mix)
-#print('Test No. for each edge found ', v)
-
 print("Absolute Efficiency for Mix Strategy is ", abeff_mix)
 print("Normalised Efficiency for Mix Strategy is ", normeff_mix)
 print("Relative Efficiency for Mix Strategy is ", releff_mix)
