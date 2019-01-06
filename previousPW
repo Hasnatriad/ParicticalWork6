@@ -1,0 +1,130 @@
+import networkx as nx
+import matplotlib.pylab as plt
+
+G = nx.read_edgelist('Flickr-test.txt')
+G = nx.convert_node_labels_to_integers(G, first_label=0, ordering='default')
+
+#Excercise 1
+def degree(G):
+    deg = [0 for x in range(len(G))]
+
+    j = 0
+    for i in G:
+        deg[j] = len(G[i])
+        j += 1
+    return deg
+
+def degdis(G, deg):
+    i = (max(deg))
+    dd = [0 for x in range(i)]
+    for x in range(i):
+        dd[x] = deg.count(x+1)
+    return dd
+
+def avdeg(deg):
+    s = 0
+    for i in range(len(deg)):
+        s = s + deg[i]
+    avg = s/len(deg)
+    return avg
+
+def tri(G, n, deg):
+    tr = [0] * n
+    u = 0
+    while u < n:
+        i = 0
+        while i < deg[u]:
+            v = list(G.neighbors(u))
+            v = v[i]
+            if u < v:
+                U = list(G.neighbors(u))
+                V = list(G.neighbors(v))
+                iu = 0
+                iv = 0
+                while (iu < deg[u]) & (iv < deg[v])\
+                        & (U[iu] < u) & (V[iv] < u):
+                    if U[iu] < V[iv]:
+                        iu += 1
+                    else:
+                        if U[iu] > V[iv]:
+                            iv += 1
+                        else:
+                            tr[u-1] += 1
+                            tr[v-1] += 1
+                            tr[U[iu]] += 1
+                            iu += 1
+                            iv += 1
+            i += 1
+        u += 1
+    return tr
+
+def triplet(G, n):
+    i = 0
+    trip = [0] * n
+    while i < n:
+        neigh = list(G.neighbors(i))
+        len_neigh = len(neigh)
+        if len_neigh >= 2:
+            trip[i] = len_neigh*(len_neigh-1)/2
+        i += 1
+    return trip
+
+def ccoef(tr, trip, n):
+    cc = 0
+    total = 0
+    i = 0
+    while i < n:
+        if trip[i] != 0:
+            total += tr[i]/trip[i]
+        i += 1
+    cc = total/n
+    return cc
+
+def trratio(tr, trip, n):
+    i = 0
+    sum_tr = 0
+    sum_trip = 0
+    while i < n:
+        sum_tr += tr[i]
+        sum_trip += trip[i]
+        i += 1
+    tranratio = (3 * sum_tr) / sum_trip
+    return tranratio
+
+n = len(G.nodes())
+print('No. of nodes ', n)
+
+m = len(G.edges())
+print('No. of edges ', m)
+
+den = (2*m)/(n*(n-1))
+print('Density ', den)
+
+deg = degree(G)
+print("Degree ", deg)
+
+maxdeg = max(deg)
+print("Maximum Degree ", maxdeg)
+
+dd = degdis(G, deg)
+print("Degree Distribution ", dd)
+plt.loglog(dd)
+plt.grid(True, which="both")
+plt.title('Flickr-test Degree Distribution - Graph')
+plt.savefig("Flickr-test DegreeDistribution.png")
+plt.show()
+
+avg = avdeg(deg)
+print("Average Degree ", avg)
+
+tr = tri(G, n, deg)
+#print("No. of Triangles ", tr)
+
+trip = triplet(G, n)
+#print("No. of Triplets ", trip)
+
+cc = ccoef(tr, trip,  n)
+print("Clustering Coefficient ", cc)
+
+tratio = trratio(tr, trip, n)
+print("Transitive Ratio ", tratio)
