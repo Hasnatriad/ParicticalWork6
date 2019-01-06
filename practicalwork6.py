@@ -113,7 +113,7 @@ print("Degree Distribution ", dd)
 plt.loglog(dd)
 plt.grid(True, which="both")
 plt.title('Flickr-test Degree Distribution - Graph')
-plt.savefig("Flickr-test DegDist.png")
+plt.savefig("Flickr-test DegreeDistribution.png")
 plt.show()
 
 avg = avdeg(deg)
