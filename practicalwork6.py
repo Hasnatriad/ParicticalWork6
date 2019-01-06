@@ -112,7 +112,7 @@ dd = degdis(G, deg)
 print("Degree Distribution ", dd)
 plt.loglog(dd)
 plt.grid(True, which="both")
-plt.title('Degree Distribution - Graph Flickr-test')
+plt.title('Flickr-test Degree Distribution - Graph')
 plt.savefig("Flickr-test DegDist.png")
 plt.show()
 
